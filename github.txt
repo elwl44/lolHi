@@ -1,12 +1,12 @@
 git init
-git remote add origin ÁÖ¼Ò
+git remote add origin https://github.com/elwl44/lolHi.git
 git pull origin master
 
 
 Push
 git init
-git remote add origin ÁÖ¼Ò
+git remote add origin https://github.com/elwl44/lolHi.git
 git status
 git add .
-git commit -m "¸Þ¼¼Áö"
+git commit -m "msg"
 git push origin master
