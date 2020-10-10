@@ -1,12 +1,12 @@
 git init
-git remote add origin 林家
+git remote add origin 脕脰录脪
 git pull origin master
 
 
 Push
 git init
-git remote add origin 林家
+git remote add origin 脕脰录脪
 git status
 git add .
-git commit -m "皋技瘤"
-git push
+git commit -m "赂脼录录脕枚"
+git push origin master
