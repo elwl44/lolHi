@@ -17,5 +17,14 @@ public class ArticleService {
 		
 		return articleDao.getArticles();
 	}
-
+	public Article getArticleById(int id) {
+		return articleDao.getArticleById(id);
+	}
+	public Article doDeleteId(int id) {
+		return articleDao.doDeleteId(id);
+	}
+	public Article doModifyid(int id,String title, String body) {
+		System.out.println("아이디"+id+"*"+title);
+		return articleDao.modifyArticle(id,title,body);
+	}
 }

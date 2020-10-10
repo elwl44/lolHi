@@ -1,0 +1,12 @@
+git init
+git remote add origin 林家
+git pull origin master
+
+
+Push
+git init
+git remote add origin 林家
+git status
+git add .
+git commit -m "皋技瘤"
+git push

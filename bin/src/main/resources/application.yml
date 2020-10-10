@@ -28,4 +28,4 @@ custom:
 spring:
   profiles: local
 server:
-  port: 8090
+  port: 8085
