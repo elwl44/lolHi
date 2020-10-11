@@ -53,4 +53,9 @@ public class ArticleController {
 		int id = articleService.writeArticle(param);
 		return String.format("<script> alert('%d번 글이 생성되였습니다.'); location.replace('/usr/article/detail?id=%d'); </script>", id, id);
 	}
+	@RequestMapping("/usr/article/write")
+	public String showWrite() {
+		return "usr/article/write";
+	}
+
 }
