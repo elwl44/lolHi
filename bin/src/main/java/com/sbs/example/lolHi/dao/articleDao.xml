@@ -8,6 +8,30 @@
 		From article
 	</select>
 
+	<select id="getArticleById" resultType="Article">
+		SELECT *
+		FROM article
+		WHERE id = #{id}
+	</select>
 	
+	<delete id="doDeleteId">
+		delete
+		FROM article
+		WHERE id = #{id}
+	</delete>
+	
+	<update id="modifyArticle">
+		UPDATE article
+		<set>
+			updateDate = NOW(),
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="body != null">
+				`body` = #{body},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 	
 </mapper>

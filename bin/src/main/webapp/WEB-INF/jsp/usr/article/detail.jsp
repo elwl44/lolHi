@@ -9,7 +9,7 @@
 <title>게시물 상세페이지</title>
 </head>
 <body>
-	<h1>게시물 상세페이지</h1>
+	<h1>게시물 상세페이지1</h1>
 	
 	<div>제목 : ${article.id}</div>
 

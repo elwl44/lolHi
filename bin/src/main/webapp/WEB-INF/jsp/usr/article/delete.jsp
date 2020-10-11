@@ -6,16 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 상세페이지</title>
+<title>게시물 삭제페이지</title>
+<script type="text/javascript">
+
+  alert("${id}번 게시물이 삭제되었습니다.");
+
+</script>
 </head>
 <body>
-	<h1>게시물 상세페이지</h1>
-	
-	<div>제목 : ${article.id}</div>
-
-	<div>제목 : ${article.title}</div>
-	
-	<div>내용 : ${article.body}</div>
 
 </body>
 </html>
