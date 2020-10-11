@@ -22,7 +22,6 @@ public class ArticleController {
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
 		List<Article> articles = articleService.getArticles();
-
 		model.addAttribute("articles", articles);
 		return "usr/article/list";
 	}
@@ -33,6 +32,7 @@ public class ArticleController {
 		model.addAttribute("article", article);
 		return "usr/article/detail";
 	}
+	
 
 	@RequestMapping("/usr/article/delete")
 	@ResponseBody
@@ -41,9 +41,9 @@ public class ArticleController {
 		return String.format("<script> alert('%d번 글을 삭제하였습니다.'); location.replace('/usr/article/list'); </script>", id);
 	}
 	
-	@RequestMapping("/usr/article/modify")
+	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String showModify(int id,String title, String body) {
+	public String doModify(int id,String title, String body) {
 		articleService.doModifyid(id,title,body);
 		return String.format("<script> alert('%d번 글을 수정하였습니다.'); location.replace('/usr/article/detail?id=%d'); </script>", id, id);
 	}
@@ -56,6 +56,14 @@ public class ArticleController {
 	@RequestMapping("/usr/article/write")
 	public String showWrite() {
 		return "usr/article/write";
+	}
+	@RequestMapping("/usr/article/modify")
+	public String showModify(Model model, int id) {
+		Article article = articleService.getArticleById(id);
+
+		model.addAttribute("article", article);
+		
+		return "usr/article/modify";
 	}
 
 }
