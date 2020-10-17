@@ -9,16 +9,32 @@ import org.springframework.stereotype.Service;
 import com.sbs.example.lolHi.dao.ArticleDao;
 import com.sbs.example.lolHi.dto.Article;
 
-import cmd.sbs.example.lolHi.util.Util;
+import com.sbs.example.lolHi.util.Util;
 
 @Service
 public class ArticleService {
 
 	@Autowired
 	private ArticleDao articleDao;
-	public List<Article> getArticles() {
+	public List<Article> getArticles(Map<String, Object> param) {
+		int page = Util.getAsInt(param.get("page"), 1);
+
+		// 한 리스트에 나올 수 있는 게시물 게수
+		int itemsCountInAPage = Util.getAsInt(param.get("itemsCountInAPage"), 10);
 		
-		return articleDao.getArticles();
+		if ( itemsCountInAPage > 100 ) {
+			itemsCountInAPage = 100;
+		}
+		else if ( itemsCountInAPage < 1 ) {
+			itemsCountInAPage = 1;
+		}
+
+		int limitFrom = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		param.put("limitFrom", limitFrom);
+		param.put("limitTake", limitTake);
+		return articleDao.getArticles(param);
 	}
 	public Article getArticleById(int id) {
 		return articleDao.getArticleById(id);
@@ -36,5 +52,8 @@ public class ArticleService {
 		int id = Util.getAsInt(param.get("id"));
 		
 		return id;
+	}
+	public int getTotalCount() {
+		return articleDao.getTotalCount();
 	}
 }

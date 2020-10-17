@@ -5,9 +5,16 @@
 <mapper namespace="com.sbs.example.lolHi.dao.ArticleDao">
 	<select id="getArticles" resultType="Article">
 		SELECT *
-		From article
+		FROM article
+		ORDER BY id DESC
+		<if test="limitFrom != null and limitTake != null">
+			LIMIT #{limitFrom}, #{limitTake}
+		</if>
 	</select>
-
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM article
+	</select>
 	<select id="getArticleById" resultType="Article">
 		SELECT *
 		FROM article

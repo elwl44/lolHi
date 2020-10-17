@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.example.lolHi.dto.Article;
 import com.sbs.example.lolHi.service.ArticleService;
+import com.sbs.example.lolHi.util.Util;
 
 @Controller
 public class ArticleController {
@@ -20,9 +21,32 @@ public class ArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model) {
-		List<Article> articles = articleService.getArticles();
+	public String showList(Model model, @RequestParam Map<String, Object> param) {
+		int totalCount = articleService.getTotalCount();
+		int itemsCountInAPage = 10;
+		int totalPage = (int) Math.ceil(totalCount / (double) itemsCountInAPage);
+		int pageMenuArmSize = 10;
+		int page = Util.getAsInt(param.get("page"), 1);
+		int pageMenuStart = page - pageMenuArmSize;
+		if (pageMenuStart < 1) {
+			pageMenuStart = 1;
+		}
+		int pageMenuEnd = page + pageMenuArmSize;
+		if (pageMenuEnd > totalPage) {
+			pageMenuEnd = totalPage;
+		}
+
+		param.put("itemsCountInAPage", itemsCountInAPage);
+		List<Article> articles = articleService.getArticles(param);
+
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("pageMenuArmSize", pageMenuArmSize);
+		model.addAttribute("pageMenuStart", pageMenuStart);
+		model.addAttribute("pageMenuEnd", pageMenuEnd);
+		model.addAttribute("page", page);
 		model.addAttribute("articles", articles);
+
 		return "usr/article/list";
 	}
 

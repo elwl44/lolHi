@@ -2906,3 +2906,92 @@ com.sbs.example.lolHi.controller.usr.ArticleController#showListPage(Model, int) 
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1790)
 	... 22 common frames omitted
+2020-10-18 05:28:25 [INFO ] c.sbs.example.lolHi.LolHiApplication - Starting LolHiApplication on DESKTOP-27DGAKS with PID 12660 (C:\work\sts-4.8.0.RELEASE-workspace\lolHi2\target\classes started by pbk11 in C:\work\sts-4.8.0.RELEASE-workspace\lolHi2)
+2020-10-18 05:28:25 [INFO ] c.sbs.example.lolHi.LolHiApplication - The following profiles are active: local
+2020-10-18 05:28:25 [INFO ] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-10-18 05:28:25 [INFO ] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-10-18 05:28:26 [INFO ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8090 (http)
+2020-10-18 05:28:26 [INFO ] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8090"]
+2020-10-18 05:28:26 [INFO ] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-10-18 05:28:26 [INFO ] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-10-18 05:28:26 [INFO ] org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-10-18 05:28:26 [INFO ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-10-18 05:28:26 [INFO ] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1047 ms
+2020-10-18 05:28:27 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-18 05:28:27 [INFO ] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-10-18 05:28:27 [INFO ] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8090"]
+2020-10-18 05:28:27 [INFO ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8090 (http) with context path ''
+2020-10-18 05:28:27 [INFO ] c.sbs.example.lolHi.LolHiApplication - Started LolHiApplication in 1.851 seconds (JVM running for 2.584)
+2020-10-18 05:28:28 [INFO ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-18 05:28:28 [INFO ] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-10-18 05:28:28 [INFO ] o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2020-10-18 05:28:28 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2020-10-18 05:28:28 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2020-10-18 05:28:28 [DEBUG] jdbc.sqltiming -  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT COUNT(*)
+		FROM article
+ {executed in 5 msec}
+2020-10-18 05:28:28 [INFO ] jdbc.resultsettable - 
+|---------|
+|count(*) |
+|---------|
+|51       |
+|---------|
+
+2020-10-18 05:28:28 [DEBUG] jdbc.sqltiming -  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT *
+		FROM article
+		ORDER BY id DESC
+
+			LIMIT 20, 10
+ {executed in 1 msec}
+2020-10-18 05:28:28 [INFO ] jdbc.resultsettable - 
+|---|--------------------|--------------------|------|-----|
+|id |regdate             |updatedate          |title |body |
+|---|--------------------|--------------------|------|-----|
+|31 |2020-10-18 04:19:20 |2020-10-18 04:19:20 |제목    |내용   |
+|30 |2020-10-18 04:19:20 |2020-10-18 04:19:20 |제목    |내용   |
+|29 |2020-10-18 04:19:19 |2020-10-18 04:19:19 |제목    |내용   |
+|28 |2020-10-18 04:19:19 |2020-10-18 04:19:19 |제목    |내용   |
+|27 |2020-10-18 04:19:18 |2020-10-18 04:19:18 |제목    |내용   |
+|26 |2020-10-18 04:19:18 |2020-10-18 04:19:18 |제목    |내용   |
+|25 |2020-10-18 04:19:17 |2020-10-18 04:19:17 |제목    |내용   |
+|24 |2020-10-18 04:19:17 |2020-10-18 04:19:17 |제목    |내용   |
+|23 |2020-10-18 04:19:16 |2020-10-18 04:19:16 |제목    |내용   |
+|22 |2020-10-18 04:19:15 |2020-10-18 04:19:15 |제목    |내용   |
+|---|--------------------|--------------------|------|-----|
+
+2020-10-18 05:28:33 [DEBUG] jdbc.sqltiming -  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT COUNT(*)
+		FROM article
+ {executed in 1 msec}
+2020-10-18 05:28:33 [INFO ] jdbc.resultsettable - 
+|---------|
+|count(*) |
+|---------|
+|51       |
+|---------|
+
+2020-10-18 05:28:33 [DEBUG] jdbc.sqltiming -  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT *
+		FROM article
+		ORDER BY id DESC
+
+			LIMIT 10, 10
+ {executed in 0 msec}
+2020-10-18 05:28:33 [INFO ] jdbc.resultsettable - 
+|---|--------------------|--------------------|------|-----|
+|id |regdate             |updatedate          |title |body |
+|---|--------------------|--------------------|------|-----|
+|41 |2020-10-18 04:19:31 |2020-10-18 04:19:31 |제목    |내용   |
+|40 |2020-10-18 04:19:29 |2020-10-18 04:19:29 |제목    |내용   |
+|39 |2020-10-18 04:19:24 |2020-10-18 04:19:24 |제목    |내용   |
+|38 |2020-10-18 04:19:23 |2020-10-18 04:19:23 |제목    |내용   |
+|37 |2020-10-18 04:19:23 |2020-10-18 04:19:23 |제목    |내용   |
+|36 |2020-10-18 04:19:22 |2020-10-18 04:19:22 |제목    |내용   |
+|35 |2020-10-18 04:19:22 |2020-10-18 04:19:22 |제목    |내용   |
+|34 |2020-10-18 04:19:21 |2020-10-18 04:19:21 |제목    |내용   |
+|33 |2020-10-18 04:19:21 |2020-10-18 04:19:21 |제목    |내용   |
+|32 |2020-10-18 04:19:20 |2020-10-18 04:19:20 |제목    |내용   |
+|---|--------------------|--------------------|------|-----|
+
