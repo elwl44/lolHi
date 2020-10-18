@@ -35,7 +35,7 @@ public class ArticleController {
 		if (pageMenuEnd > totalPage) {
 			pageMenuEnd = totalPage;
 		}
-
+		
 		param.put("itemsCountInAPage", itemsCountInAPage);
 		List<Article> articles = articleService.getArticles(param);
 
