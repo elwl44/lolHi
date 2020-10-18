@@ -2995,3 +2995,7 @@ com.sbs.example.lolHi.controller.usr.ArticleController#showListPage(Model, int) 
 |32 |2020-10-18 04:19:20 |2020-10-18 04:19:20 |제목    |내용   |
 |---|--------------------|--------------------|------|-----|
 
+2020-10-18 05:29:43 [INFO ] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2020-10-18 05:29:43 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-10-18 05:29:43 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2020-10-18 05:29:43 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -14,6 +14,8 @@
 	<div>내용: <input type="text" maxlength="30" name="body"placeholder = "내용"></div>
 	<div>제출 : <input type="submit" value="작성" /></div>
 	</form>
-
+	<div>
+		<a href="list">리스트</a>
+	</div>
 </body>
 </html>

@@ -57,7 +57,6 @@ public class ArticleController {
 		return "usr/article/detail";
 	}
 	
-
 	@RequestMapping("/usr/article/delete")
 	@ResponseBody
 	public String showDelete(int id) {
