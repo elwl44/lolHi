@@ -65,4 +65,12 @@ public class MemberController {
 		session.setAttribute("loginedMemberId", member.getId());
 		return String.format("<script> alert('%s님 환영합니다.'); location.replace('/usr/article/list'); </script>",member.getName());
 	}
+	
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public String doLogout(HttpSession session) {
+
+		session.removeAttribute("loginedMemberId");
+		return String.format("<script>location.replace('/usr/article/list'); </script>");
+	}
 }
