@@ -8,6 +8,7 @@
 <title>게시물 리스트</title>
 </head>
 <body>
+	[${sessionScope}]
 	<h1>게시물 리스트</h1>
 
 	<div>총 게시물 수 : ${totalCount}</div>
@@ -46,7 +47,7 @@
 
 		<!-- 마지막 페이지로 이동버튼이 노출될 필요가 있는지 여부 -->
 		<c:set var="goLastBtnNeedToShow" value="true" />
-		
+
 		<!-- 첫 페이지로 이동버튼이 노출될 필요가 있다면 노출 -->
 		<c:if test="${goFirstBtnNeedToShow}">
 			<a href="?page=1">◀</a>
