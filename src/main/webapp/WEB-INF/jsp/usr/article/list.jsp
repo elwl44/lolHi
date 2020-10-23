@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시물 리스트</title>
-</head>
-<body>
-	[${sessionScope}]
-	<h1>게시물 리스트</h1>
+<c:set var="title" value="게시물 리스트" />
+<%@include file="../part/head.jspf" %>
 
 	<div>총 게시물 수 : ${totalCount}</div>
 	<c:forEach items="${articles}" var="article">
@@ -66,5 +59,4 @@
 			<a href="?page=${totalPage}">▶</a>
 		</c:if>
 	</div>
-</body>
-</html>
+<%@include file="../part/foot.jspf" %>

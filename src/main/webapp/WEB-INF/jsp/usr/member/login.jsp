@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-</head>
-<body>
-	<h1>로그인</h1>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="title" value="로그인" />
+<%@include file="../part/head.jspf" %>
 	<script>
 		var loginFormSubmitDone = false;
 		function loginFormSubmit(form) {
@@ -45,5 +40,4 @@
 			로그인 : <input type="submit" value="로그인" />
 		</div>
 	</form>
-</body>
-</html>
+<%@include file="../part/foot.jspf" %>
