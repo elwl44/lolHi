@@ -13,20 +13,21 @@
 	</select>
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*)
-		FROM article
+		FROM
+		article
 	</select>
 	<select id="getArticleById" resultType="Article">
 		SELECT *
 		FROM article
 		WHERE id = #{id}
 	</select>
-	
+
 	<delete id="doDeleteId">
 		delete
 		FROM article
 		WHERE id = #{id}
 	</delete>
-	
+
 	<update id="modifyArticle">
 		UPDATE article
 		<set>
@@ -40,8 +41,9 @@
 		</set>
 		WHERE id = #{id}
 	</update>
-	
-	<insert id="writeArticle" useGeneratedKeys="true" keyProperty="id">
+
+	<insert id="writeArticle" useGeneratedKeys="true"
+		keyProperty="id">
 		INSERT INTO article
 		<set>
 			regDate = NOW(),
@@ -52,7 +54,10 @@
 			<if test="body != null">
 				`body` = #{body},
 			</if>
+			<if test="memberId != null">
+				`memberId` = #{memberId},
+			</if>
 		</set>
 	</insert>
-	
+
 </mapper>
