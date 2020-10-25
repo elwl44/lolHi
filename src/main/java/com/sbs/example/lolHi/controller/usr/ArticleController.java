@@ -1,6 +1,5 @@
 package com.sbs.example.lolHi.controller.usr;
 
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,14 +62,7 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	public String doDelete(int id,Model model,HttpServletRequest req) {
-		boolean isLogined = (boolean) req.getAttribute("isLogined");
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
-		
-		if (isLogined == false) {
-			model.addAttribute("msg", "로그인 후 이용해주세요.");
-			model.addAttribute("replaceUri", "/usr/member/login");
-			return "common/redirect";
-		}
 		
 		Article article = articleService.getArticleById(id);
 		
@@ -86,16 +78,9 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	public String showModify(Model model, int id, HttpSession session) {
-		int loginedMemberId = 0;
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		if (loginedMemberId == 0) {
-			model.addAttribute("msg", "로그인 후 이용해주세요.");
-			model.addAttribute("replaceUri", "/usr/member/login");
-			return "common/redirect";
-		}
+	public String showModify(HttpServletRequest req, Model model, int id) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
 		Article article = articleService.getArticleById(id);
 		if(loginedMemberId !=article.getMemberId()) {
 			model.addAttribute("msg", "권한이 없습니다.");
@@ -106,17 +91,11 @@ public class ArticleController {
 		return "usr/article/modify";
 	}
 	@RequestMapping("/usr/article/doModify")
-	public String doModify(int id, String title, String body, Model model, HttpSession session) {
-		int loginedMemberId = 0;
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		if (loginedMemberId == 0) {
-			model.addAttribute("msg", "로그인 후 이용해주세요.");
-			model.addAttribute("historyBack", true);
-			return "common/redirect";
-		}
+	public String doModify(HttpServletRequest req, int id, String title, String body, Model model) {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		
 		Article article = articleService.getArticleById(id);
+		
 		if(loginedMemberId !=article.getMemberId()) {
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("replaceUri", "/usr/article/list");
@@ -131,31 +110,13 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/write")
 	public String showWrite(HttpSession session, Model model) {
-		int loginedMemberId = 0;
-
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		if (loginedMemberId == 0) {
-			model.addAttribute("msg", "로그인 후 이용해주세요.");
-			model.addAttribute("replaceUri", "/usr/member/login");
-			return "common/redirect";
-		}
 		return "usr/article/write";
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	public String doWrite(@RequestParam Map<String, Object> param, Model model,HttpSession session) {
-		int loginedMemberId = 0;
+		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-		}
-		if (loginedMemberId == 0) {
-			model.addAttribute("msg", "로그인 후 이용해주세요.");
-			model.addAttribute("replaceUri", "/usr/member/login");
-			return "common/redirect";
-		}
 		param.put("memberId", loginedMemberId);
 		int id = articleService.writeArticle(param);
 

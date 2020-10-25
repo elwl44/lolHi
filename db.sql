@@ -1,7 +1,7 @@
 # 데이터 베이스 생성
-DROP DATABASE IF EXISTS lolHiT;
-CREATE DATABASE lolHiT;
-USE lolHiT;
+DROP DATABASE IF EXISTS lolHi;
+CREATE DATABASE lolHi;
+USE lolHi;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
@@ -39,16 +39,16 @@ CREATE TABLE `member` (
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-loginId = 'test1',
-loginPw = 'test1',
-`name` = '홍길동';
+loginId = 'elwl44',
+loginPw = '1234',
+`name` = 'pbk1';
 
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-loginId = 'test2',
-loginPw = 'test2',
-`name` = '홍길순';
+loginId = 'elwl45',
+loginPw = '12345',
+`name` = 'pbk2';
 
 # 게시물 테이블에 memberId 칼럼 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
