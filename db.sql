@@ -69,3 +69,16 @@ updateDate = NOW(),
 title = '제목4',
 `body` = '내용4',
 memberId = 2;
+
+# 댓글 테이블 생성
+CREATE TABLE reply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `body` TEXT NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL, # 관련 데이터 ID
+    relTypeCode CHAR(50) NOT NULL # 관련 데이터 타입
+);
+
+SELECT * FROM reply; 

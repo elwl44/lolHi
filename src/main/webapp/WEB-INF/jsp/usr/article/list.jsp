@@ -62,7 +62,8 @@
 
 	<c:forEach var="i" begin="${pageMenuStart}" end="${pageMenuEnd}">
 		<c:set var="className" value="${i == page ? 'selected' : ''}" />
-		<a class="${className}" href="?page=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+		<a class="${className}"
+			href="?page=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
 		<!-- 방금 노출된 페이지 번호가 마지막 페이지의 번호였다면, 마지막으로 이동하는 버튼이 노출될 필요가 없다고 설정 -->
 		<c:if test="${i == totalPage}">
 			<c:set var="goLastBtnNeedToShow" value="false" />
