@@ -81,4 +81,35 @@ CREATE TABLE reply (
     relTypeCode CHAR(50) NOT NULL # 관련 데이터 타입
 );
 
-SELECT * FROM reply; 
+# 댓글 데이터 추가
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 1',
+memberId = 1;
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 2',
+memberId = 1;
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 3',
+memberId = 1;
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 4',
+memberId = 2;
