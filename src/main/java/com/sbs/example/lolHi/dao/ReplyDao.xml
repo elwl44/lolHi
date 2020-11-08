@@ -30,4 +30,16 @@
 		AND relId = #{relId}
 		ORDER BY id DESC
 	</select>
+	
+	<select id="getReply" resultType="Reply">
+		SELECT *
+		FROM reply
+		WHERE id = #{id}
+	</select>
+	
+	<delete id="deleteReplyById">
+		DELETE FROM reply
+		WHERE id = #{id}
+	</delete>
+	
 </mapper>
