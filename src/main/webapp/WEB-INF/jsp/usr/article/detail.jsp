@@ -25,6 +25,7 @@
 <h2>댓글 작성</h2>
 
 <form action="/usr/reply/doWrite" method="POST">
+	<input type="hidden" name="redirectUrl" value="${currentUri}" />
 	<input type="hidden" name="relTypeCode" value="article" />
 	<input type="hidden" name="relId" value="${param.id}" />
 
