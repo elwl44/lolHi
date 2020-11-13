@@ -15,8 +15,9 @@ public class Reply {
 	private String updateDate;
 	private String relTypeCode;
 	private int relId;
-	private int memberId;
 	private String body;
+	private int memberId;
+	
 
 	private Map<String, Object> extra;
 }

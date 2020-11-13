@@ -24,7 +24,8 @@ public class ReplyService {
 	}
 
 	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
-		return replyDao.getForPrintReplies(relTypeCode, relId);
+		List<Reply> a=replyDao.getForPrintReplies(relTypeCode, relId);
+		return a;
 	}
 
 	public Reply getReply(int id) {
