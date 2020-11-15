@@ -17,9 +17,11 @@
 
 <div>
 	<a href="${listUrl}">리스트</a>
-	<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
-		href="doDelete?id=${article.id}">삭제</a>
-	<a href="modify?id=${article.id}">수정</a>
+	<c:if test="${loginedMemberId == article.memberId}">
+		<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
+			href="doDelete?id=${article.id}">삭제</a>
+		<a href="modify?id=${article.id}">수정</a>
+	</c:if>
 </div>
 
 <h2>댓글 작성</h2>
@@ -46,10 +48,13 @@
 	<div>수정날짜 : ${reply.updateDate}</div>
 	<div>작성자 : ${reply.extra.writer}</div>
 	<div>내용 : ${reply.body}</div>
-	<div>
-		<a href="/usr/reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUri}">수정</a>
-		<a href="/usr/reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUri}">삭제</a>
-	</div>
+
+	<c:if test="${loginedMemberId == reply.memberId}">
+		<div>
+			<a href="/usr/reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUri}">수정</a>
+			<a href="/usr/reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUri}">삭제</a>
+		</div>
+	</c:if>
 	<hr />
 </c:forEach>
 
