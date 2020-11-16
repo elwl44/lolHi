@@ -58,8 +58,9 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, int id, String listUrl) {
-		Article article = articleService.getForPrintArticleById(id);
+	public String showDetail(HttpServletRequest req, Model model, int id, String listUrl) {
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		List<Reply> replies = replyService.getForPrintReplies("article", id);
 
 		if ( listUrl == null ) {
@@ -75,11 +76,11 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	public String doDelete(int id, Model model, HttpServletRequest req) {
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 
-		if (loginedMemberId != article.getMemberId()) {
+		if ((boolean) article.getExtra().get("actorCanDelete") == false) {
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("replaceUri", "/usr/article/list");
 			return "common/redirect";
@@ -92,10 +93,11 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, int id) {
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 
-		Article article = articleService.getForPrintArticleById(id);
-		if (loginedMemberId != article.getMemberId()) {
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
+		
+		if ((boolean) article.getExtra().get("actorCanModify") == false) {
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			return "common/redirect";
@@ -106,11 +108,11 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	public String doModify(HttpServletRequest req, int id, String title, String body, Model model) {
-		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 
-		if (loginedMemberId != article.getMemberId()) {
+		if ((boolean) article.getExtra().get("actorCanModify") == false) {
 			model.addAttribute("msg", "권한이 없습니다.");
 			model.addAttribute("replaceUri", "/usr/article/list");
 			return "common/redirect";
