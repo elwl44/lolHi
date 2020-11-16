@@ -33,10 +33,14 @@
 		제목 :
 		<a href="${detailUrl}">${article.title}</a>
 		<br />
-		<c:if test="${loginedMemberId == article.memberId}">
+		<c:if test="${article.extra.actorCanDelete||article.extra.actorCanModify}">
 			작업 :
+		</c:if>
+		<c:if test="${article.extra.actorCanDelete}">
 			<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
 				href="doDelete?id=${article.id}">삭제</a>
+		</c:if>
+		<c:if test="${article.extra.actorCanModify}">
 			<a href="modify?id=${article.id}">수정</a>
 		</c:if>
 	</div>
