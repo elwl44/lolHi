@@ -61,7 +61,7 @@ public class ArticleController {
 	public String showDetail(HttpServletRequest req, Model model, int id, String listUrl) {
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
 		Article article = articleService.getForPrintArticleById(loginedMember, id);
-		List<Reply> replies = replyService.getForPrintReplies("article", id);
+		List<Reply> replies = replyService.getForPrintReplies(loginedMember, "article", id);
 
 		if ( listUrl == null ) {
 			listUrl = "/usr/article/list";
