@@ -134,3 +134,8 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `name` = '자유',
 `code` = 'free'; 
+
+# 게시물 테이블에 boardId 칼럼 추가
+ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+UPDATE article SET boardId = 1 WHERE id <= 2;
+UPDATE article SET boardId = 2 WHERE id > 2;
