@@ -81,6 +81,9 @@
 			<if test="memberId != null">
 				`memberId` = #{memberId},
 			</if>
+			<if test="boardId != null">
+				`boardId` = #{boardId},
+			</if>
 		</set>
 	</insert>
 

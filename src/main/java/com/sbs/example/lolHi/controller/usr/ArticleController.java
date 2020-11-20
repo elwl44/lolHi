@@ -141,15 +141,18 @@ public class ArticleController {
 		return "common/redirect";
 	}
 
-	@RequestMapping("/usr/article/write")
+	@RequestMapping("/usr/article-{boardCode}/write")
 	public String showWrite(HttpSession session, Model model) {
 		return "usr/article/write";
 	}
 
-	@RequestMapping("/usr/article/doWrite")
-	public String doWrite(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
-		int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+	@RequestMapping("/usr/article-{boardCode}/doWrite")
+	public String doWrite(HttpServletRequest req, @RequestParam Map<String, Object> param, Model model,
+			@PathVariable("boardCode") String boardCode) {
+		Board board = articleService.getBoardByCode(boardCode);
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 
+		param.put("boardId", board.getId());
 		param.put("memberId", loginedMemberId);
 		int id = articleService.writeArticle(param);
 
