@@ -23,5 +23,6 @@
 			<a href="/usr/member/join">회원가입</a>
 		</c:if>
 
-		<a href="/usr/article/list">글리스트</a>
+		<a href="/usr/article-notice/list">공지사항 글 리스트</a>
+		<a href="/usr/article-free/list">자유 글 리스트</a>
 	</div>
