@@ -41,13 +41,13 @@
 				href="doDelete?id=${article.id}">삭제</a>
 		</c:if>
 		<c:if test="${article.extra.actorCanModify}">
-			<a href="modify?id=${article.id}">수정</a>
+			<a href="modify?id=${article.id}&listUrl=${encodedCurrentUri}">수정</a>
 		</c:if>
 	</div>
 	<hr />
 </c:forEach>
 <div>
-	<a href="write">글쓰기</a>
+	<a href="write?listUrl=${encodedCurrentUri}">글쓰기</a>
 </div>
 <style>
 .selected {

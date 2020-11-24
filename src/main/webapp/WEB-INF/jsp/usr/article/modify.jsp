@@ -4,6 +4,7 @@
 <c:set var="title" value="${board.name} 게시물 수정" />
 <%@include file="../part/head.jspf"%>
 <form action="doModify" method="POST">
+	<input type="hidden" name="listUrl" value="${listUrl}" />
 	<input type="hidden" name="id" value="${article.id}" />
 	<div>번호 : ${article.id}</div>
 	<div>작성날짜 : ${article.regDate}</div>

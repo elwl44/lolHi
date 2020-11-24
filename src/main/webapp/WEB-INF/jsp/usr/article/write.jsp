@@ -4,6 +4,7 @@
 <c:set var="title" value="게시물 작성" />
 <%@include file="../part/head.jspf" %>
 	<form action="doWrite">
+		<input type="hidden" name="listUrl" value="${listUrl}" />
 		<div>
 			제목: <input type="text" maxlength="30" name="title" placeholder="제목">
 		</div>

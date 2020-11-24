@@ -4,7 +4,6 @@
 
 <c:set var="title" value="${board.name} 게시물 상세페이지" />
 <%@include file="../part/head.jspf"%>
-
 <div>번호 : ${article.id}</div>
 
 <div>작성자 : ${article.extra.writer}</div>
@@ -22,7 +21,7 @@
 			href="doDelete?id=${article.id}">삭제</a>
 	</c:if>
 	<c:if test="${article.extra.actorCanDelete}">
-		<a href="modify?id=${article.id}">수정</a>
+		<a href="modify?id=${article.id}&listUrl=${listUrl}">수정</a>
 	</c:if>
 	<a href="write">글 작성</a>
 </div>
