@@ -139,3 +139,7 @@ updateDate = NOW(),
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER updateDate;
 UPDATE article SET boardId = 1 WHERE id <= 2;
 UPDATE article SET boardId = 2 WHERE id > 2;
+
+# 회원테이블에 email 칼럼 추가
+ALTER TABLE MEMBER ADD COLUMN email CHAR(100) NOT NULL NOT NULL AFTER `name`;
+UPDATE `member` SET email = 'pbk11908@gmail.com' WHERE email = '';

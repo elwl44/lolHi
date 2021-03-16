@@ -18,6 +18,9 @@
 			<if test="name != null">
 				`name` = #{name},
 			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
 		</set>
 	</insert>
 
@@ -32,6 +35,15 @@
 		FROM member
 		WHERE
 		id = #{id}
+	</select>
+
+	<select id="getMemberByNameAndEmail" resultType="Member">
+		SELECT *
+		FROM
+		member
+		WHERE `name` = #{name}
+		AND email = #{email}
+		LIMIT 1
 	</select>
 
 	<update id="modify">
