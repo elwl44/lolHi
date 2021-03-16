@@ -59,6 +59,27 @@ public class MemberController {
 		return "common/redirect";
 	}
 
+	@RequestMapping("/usr/member/findLoginId")
+	public String showFindLoginId() {
+		return "usr/member/findLoginId";
+	}
+
+	@RequestMapping("/usr/member/doFindLoginId")
+	public String doFindLoginId(Model model, String name, String email) {
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+
+		if (member == null) {
+			model.addAttribute("msg", String.format("해당회원은 존재하지 않습니다."));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+
+		model.addAttribute("msg", String.format("가입날짜 : %s, 로그인아이디 : %s", member.getRegDate(), member.getLoginId()));
+		model.addAttribute("historyBack", true);
+		return "common/redirect";
+	}
+
+	
 	@RequestMapping("/usr/member/login")
 	public String showLoin() {
 		return "usr/member/login";

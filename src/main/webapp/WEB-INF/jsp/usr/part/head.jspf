@@ -20,6 +20,7 @@
 		<c:if test="${not isLogined}">
 			<a href="/usr/member/login">로그인</a>
 			<a href="/usr/member/join">회원가입</a>
+			<a href="/usr/member/findLoginId">로그인아이디 찾기</a>
 		</c:if>
 
 		<a href="/usr/article-notice/list">공지사항</a>
