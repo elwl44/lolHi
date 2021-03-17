@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sbs.example.lolHi.dto.Member;
+import com.sbs.example.lolHi.dto.ResultData;
 import com.sbs.example.lolHi.service.MemberService;
 import com.sbs.example.lolHi.util.Util;
 
@@ -30,7 +31,7 @@ public class MemberController {
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 		String name = Util.getAsStr(param.get("name"), "");
 		String email = Util.getAsStr(param.get("email"), "");
-		
+
 		if (loginId.length() == 0) {
 			model.addAttribute("msg", String.format("로그인 아이디를 입력해주세요."));
 			model.addAttribute("historyBack", true);
@@ -51,7 +52,7 @@ public class MemberController {
 			model.addAttribute("replaceUri", "/usr/member/findLoginId");
 			return "common/redirect";
 		}
-		
+
 		int id = memberService.join(param);
 
 		model.addAttribute("msg", String.format("가입되었습니다."));
@@ -79,7 +80,34 @@ public class MemberController {
 		return "common/redirect";
 	}
 
-	
+	@RequestMapping("/usr/member/findLoginPw")
+	public String showFindLoginPw() {
+		return "usr/member/findLoginPw";
+	}
+
+	@RequestMapping("/usr/member/doFindLoginPw")
+	public String doFindLoginPw(Model model, String loginId, String email) {
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		if (member == null) {
+			model.addAttribute("msg", String.format("해당회원은 존재하지 않습니다."));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+
+		if (member.getEmail().equals(email) == false) {
+			model.addAttribute("msg", String.format("해당회원은 존재하지 않습니다."));
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+
+		ResultData setTempPasswordAndNotifyRsData = memberService.setTempPasswordAndNotify(member);
+
+		model.addAttribute("msg", String.format(setTempPasswordAndNotifyRsData.getMsg()));
+		model.addAttribute("historyBack", true);
+		return "common/redirect";
+	}
+
 	@RequestMapping("/usr/member/login")
 	public String showLoin() {
 		return "usr/member/login";
@@ -105,35 +133,35 @@ public class MemberController {
 			return "common/redirect";
 		}
 		session.setAttribute("loginedMemberId", member.getId());
-		
+
 		model.addAttribute("msg", String.format("%s님 환영합니다.", member.getName()));
 		model.addAttribute("replaceUri", String.format("/usr/article-free/list"));
 		return "common/redirect";
 	}
 
 	@RequestMapping("/usr/member/doLogout")
-	public String doLogout(HttpSession session,Model model) {
+	public String doLogout(HttpSession session, Model model) {
 
 		session.removeAttribute("loginedMemberId");
 		model.addAttribute("replaceUri", "/usr/article-free/list");
 		return "common/redirect";
 	}
-	
+
 	@RequestMapping("/usr/member/modify")
 	public String showModify() {
 		return "usr/member/modify";
 	}
-	
+
 	@RequestMapping("/usr/member/doModify")
 	public String doModify(Model model, HttpServletRequest req, @RequestParam Map<String, Object> param) {
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		param.put("id", loginedMemberId);
-		
+
 		param.remove("loginId");
 		param.remove("loginPw");
-		
+
 		memberService.modify(param);
-		
+
 		model.addAttribute("msg", String.format("수정되었습니다."));
 		model.addAttribute("replaceUri", "/usr/article-free/list");
 		return "common/redirect";

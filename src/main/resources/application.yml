@@ -32,6 +32,7 @@ server:
 custom:
   siteName: 롤하이
   siteMainUri: http://localhost:8090/usr/article-free/list
+  siteLoginUri: http://localhost:8090/usr/member/login
   emailFrom: no-reply@localhost
   emailFromName: 롤하이
   logging:
