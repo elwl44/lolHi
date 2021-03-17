@@ -108,6 +108,31 @@ public class MemberController {
 		return "common/redirect";
 	}
 
+	@RequestMapping("/usr/member/checkLoginPw")
+	public String showCheckLoginPw() {
+		return "usr/member/checkLoginPw";
+	}
+
+	@RequestMapping("/usr/member/doCheckLoginPw")
+	public String doCheckLoginPw(Model model, HttpServletRequest req, String loginPw, String redirectUrl) {
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+
+		if (loginedMember.getLoginPw().equals(loginPw) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			return "common/redirect";
+		}
+
+		if (redirectUrl == null || redirectUrl.length() == 0) {
+			redirectUrl = "/usr/home/main";
+		}
+
+		model.addAttribute("replaceUri", redirectUrl);
+
+		return "common/redirect";
+
+	}
+	
 	@RequestMapping("/usr/member/login")
 	public String showLoin() {
 		return "usr/member/login";
