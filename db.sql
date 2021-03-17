@@ -143,3 +143,4 @@ UPDATE article SET boardId = 2 WHERE id > 2;
 # 회원테이블에 email 칼럼 추가
 ALTER TABLE MEMBER ADD COLUMN email CHAR(100) NOT NULL NOT NULL AFTER `name`;
 UPDATE `member` SET email = 'pbk11908@gmail.com' WHERE email = '';
+UPDATE `member` SET loginpw=SHA2(loginpw,256)

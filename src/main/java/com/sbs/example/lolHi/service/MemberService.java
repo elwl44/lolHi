@@ -108,7 +108,7 @@ public class MemberService {
 		}
 
 		Map<String, Object> modifyParam = new HashMap<>();
-		modifyParam.put("loginPw", tempLoginPw);
+		modifyParam.put("loginPw", Util.sha256(tempLoginPw));
 		modifyParam.put("id", member.getId());
 		memberDao.modify(modifyParam);
 
