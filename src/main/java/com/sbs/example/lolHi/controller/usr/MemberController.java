@@ -122,13 +122,13 @@ public class MemberController {
 			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
 		}
-		
+
 		String authCode = memberService.genCheckLoginPwAuthCode(loginedMember.getId());
-		
+
 		if (redirectUrl == null || redirectUrl.length() == 0) {
 			redirectUrl = "/usr/home/main";
 		}
-		
+
 		redirectUrl = Util.getNewUri(redirectUrl, "checkLoginPwAuthCode", authCode);
 
 		model.addAttribute("replaceUri", redirectUrl);
@@ -136,7 +136,7 @@ public class MemberController {
 		return "common/redirect";
 
 	}
-	
+
 	@RequestMapping("/usr/member/login")
 	public String showLoin() {
 		return "usr/member/login";
@@ -199,8 +199,25 @@ public class MemberController {
 	}
 
 	@RequestMapping("/usr/member/doModify")
-	public String doModify(Model model, HttpServletRequest req, @RequestParam Map<String, Object> param) {
+	public String doModify(Model model, HttpServletRequest req, @RequestParam Map<String, Object> param,
+			String checkLoginPwAuthCode) {
+		if (checkLoginPwAuthCode == null || checkLoginPwAuthCode.length() == 0) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "비밀번호 체크 인증코드가 없습니다.");
+			return "common/redirect";
+		}
+
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		ResultData checkValidCheckPasswordAuthCodeResultData = memberService
+				.checkValidCheckLoginPwAuthCode(loginedMemberId, checkLoginPwAuthCode);
+
+		if (checkValidCheckPasswordAuthCodeResultData.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", checkValidCheckPasswordAuthCodeResultData.getMsg());
+			return "common/redirect";
+		}
+
 		param.put("id", loginedMemberId);
 
 		param.remove("loginId");
