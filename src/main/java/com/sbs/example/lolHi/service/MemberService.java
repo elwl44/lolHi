@@ -16,51 +16,63 @@ import com.sbs.example.lolHi.util.Util;
 
 @Service
 public class MemberService {
-	
+
 	@Value("${custom.siteName}")
 	private String siteName;
 
-	@Value("${custom.siteMainUri}")
-	private String siteMainUri;
-	
+	@Value("${custom.siteUrl}")
+	private String siteUrl;
+
 	@Value("${custom.siteLoginUri}")
 	private String siteLoginUri;
-	
+
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	@Autowired
 	private MailService mailService;
 
 	@Autowired
 	private AttrService attrService;
-	
+
 	public int join(Map<String, Object> param) {
 		memberDao.join(param);
-		int id= Util.getAsInt(param.get("id"));
-		
-		sendJoinCompleteMail((String) param.get("email"));
-		
+		int id = Util.getAsInt(param.get("id"));
+
+		String authCode = genEmailAuthCode(id);
+
+		sendJoinCompleteMail((String) param.get("email"), authCode);
+
 		return id;
 	}
 
-	private void sendJoinCompleteMail(String email) {
+	private String genEmailAuthCode(int actorId) {
+		String authCode = UUID.randomUUID().toString();
+		attrService.setValue("member__" + actorId + "__extra__emailAuthCode", authCode, Util.getDateStrLater(60 * 60));
+
+		return authCode;
+	}
+	
+	private void sendJoinCompleteMail(String email, String authCode) {
 		String mailTitle = String.format("[%s] 가입이 완료되었습니다.", siteName);
 
 		StringBuilder mailBodySb = new StringBuilder();
 		mailBodySb.append("<h1>가입이 완료되었습니다.</h1>");
-		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>로 이동</p>", siteMainUri, siteName));
+		mailBodySb.append("<div>아래 인증코드를 클릭하여 이메일인증을 마무리 해주세요.</div>");
 
-		mailService.send(email, mailTitle, mailBodySb.toString());		
+		String doAuthEmailUrl = siteUrl + "/usr/member/doAuthEmail?authCode=" + authCode + "&email=" + email;
+		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">인증하기</a>로 이동</p>", doAuthEmailUrl));
+
+		mailService.send(email, mailTitle, mailBodySb.toString());
 	}
 
 	public boolean isJoinAvailableLoginId(String loginId) {
 		Member member = memberDao.getMemberByLoginId(loginId);
-		
-		if ( member == null ) {
+
+		if (member == null) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -118,7 +130,7 @@ public class MemberService {
 
 		return new ResultData("S-1", "임시 패스워드를 메일로 발송하였습니다.");
 	}
-	
+
 	public String genCheckLoginPwAuthCode(int actorId) {
 		String authCode = UUID.randomUUID().toString();
 		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode,
@@ -126,9 +138,9 @@ public class MemberService {
 
 		return authCode;
 	}
-	
+
 	public ResultData checkValidCheckLoginPwAuthCode(int actorId, String checkLoginPwAuthCode) {
-		System.out.println(actorId+checkLoginPwAuthCode+"*******");
+		System.out.println(actorId + checkLoginPwAuthCode + "*******");
 		if (attrService.getValue("member__" + actorId + "__extra__modifyPrivateAuthCode")
 				.equals(checkLoginPwAuthCode)) {
 			return new ResultData("S-1", "유효한 키 입니다.");
