@@ -41,27 +41,28 @@ public class MemberService {
 
 		String authCode = genEmailAuthCode(id);
 
-		sendJoinCompleteMail((String) param.get("email"), authCode);
+		sendJoinCompleteMail(id, (String) param.get("email"), authCode);
 
 		return id;
 	}
 
 	private String genEmailAuthCode(int actorId) {
 		String authCode = UUID.randomUUID().toString();
-		attrService.setValue("member__" + actorId + "__extra__emailAuthCode", authCode, Util.getDateStrLater(60 * 60));
+		attrService.setValue("member__" + actorId + "__extra__emailAuthCode", authCode);
 
 		return authCode;
 	}
 	
-	private void sendJoinCompleteMail(String email, String authCode) {
+	private void sendJoinCompleteMail(int actorId, String email, String authCode) {
 		String mailTitle = String.format("[%s] 가입이 완료되었습니다.", siteName);
 
 		StringBuilder mailBodySb = new StringBuilder();
 		mailBodySb.append("<h1>가입이 완료되었습니다.</h1>");
 		mailBodySb.append("<div>아래 인증코드를 클릭하여 이메일인증을 마무리 해주세요.</div>");
 
-		String doAuthEmailUrl = siteUrl + "/usr/member/doAuthEmail?authCode=" + authCode + "&email=" + email;
-		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">인증하기</a>로 이동</p>", doAuthEmailUrl));
+		String doAuthEmailUrl = siteUrl + "/usr/member/doAuthEmail?authCode=" + authCode + "&email=" + email
+				+ "&actorId=" + actorId;
+		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">인증하기</a></p>", doAuthEmailUrl));
 
 		mailService.send(email, mailTitle, mailBodySb.toString());
 	}
@@ -147,5 +148,17 @@ public class MemberService {
 		}
 
 		return new ResultData("F-1", "유효하지 않은 키 입니다.");
+	}
+	
+	public String getEmailAuthCode(int actorId) {
+		return attrService.getValue("member__" + actorId + "__extra__emailAuthCode");
+	}
+
+	public void saveAuthedEmail(int actorId, String email) {
+		attrService.setValue("member__" + actorId + "__extra__authedEmail", email);
+	}
+
+	public String getAuthedEmail(int actorId) {
+		return attrService.getValue("member__" + actorId + "__extra__authedEmail");
 	}
 }
