@@ -13,4 +13,8 @@ public class Member {
 	private String loginPw;
 	private String name;
 	private String email;
+	
+	public boolean isAdmin() {
+		return "test1".equals(loginId);
+	}
 }
