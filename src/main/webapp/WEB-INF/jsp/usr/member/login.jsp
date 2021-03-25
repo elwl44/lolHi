@@ -32,18 +32,39 @@
 	}
 </script>
 
-<form action="doLogin" method="POST"
-	onsubmit="loginFormSubmit(this); return false;">
-	<div>
-		로그인 아이디 : <input type="text" maxlength="30"
-			placeholder="로그인 아이디를 입력해주세요." name="loginId" />
+<div class="login-box con-min-width">
+	<div class="con">
+		<form class="form-box-type-1" action="doLogin" method="POST"
+			onsubmit="loginFormSubmit(this); return false;">
+			<div>
+				<div>
+					<span>로그인 아이디</span>
+				</div>
+				<div>
+					<input type="text" maxlength="30" placeholder="로그인 아이디를 입력해주세요."
+						name="loginId" />
+				</div>
+			</div>
+			<div>
+				<div>
+					<span>로그인 비번</span>
+				</div>
+				<div>
+					<input type="password" maxlength="30" placeholder="로그인 비번을 입력해주세요."
+					name="loginPw" />
+				</div>
+			</div>
+			<div>
+				<div>
+					<span>
+						로그인
+					</span>
+				</div>
+				<div>
+					<input type="submit" value="로그인" />
+				</div>
+			</div>
+		</form>
 	</div>
-	<div>
-		로그인 비번 : <input type="password" maxlength="30"
-			placeholder="로그인 비번을 입력해주세요." name="loginPw" />
 	</div>
-	<div>
-		로그인 : <input type="submit" value="로그인" />
-	</div>
-</form>
 <%@include file="../part/foot.jspf"%>

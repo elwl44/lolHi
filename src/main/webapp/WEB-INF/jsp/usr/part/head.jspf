@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${title }</title>
+<title>${title}</title>
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap"
@@ -13,17 +15,30 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+
 <link rel="stylesheet" href="/resource/app.css">
+
 </head>
 <body>
-	<div class="logo-bar con-min-width flex flex-jc-c">
-		<a href="/" class="logo block img-box">
-			<img src="/resource/img/logo_1.png">
-		</a>
+	<div class="logo-bar con-min-width">
+		<div class="con height-100p flex flex-jc-c">
+			<div class="flex-1-0-0"></div>
+			<a href="/" class="logo-bar__logo block img-box">
+				<img src="/resource/img/logo_1.png">
+			</a>
+			<div class="flex-1-0-0 flex flex-ai-c flex-jc-e">
+				<c:if test="${isLogined}">
+					<div class="logo-bar__avatar">
+						<i class="far fa-user"></i>
+					</div>
+				</c:if>
+			</div>
+		</div>
 	</div>
+
 	<div class="top-bar con-min-width">
 		<div class="con flex flex-jc-sb height-100p">
-		<nav class="top-bar__menu-box-1">
+			<nav class="top-bar__menu-box  top-bar__menu-box-1">
 				<ul class="flex height-100p">
 					<li>
 						<a href="/" class="height-100p flex flex-jc-c flex-ai-c">
@@ -75,7 +90,8 @@
 					</c:if>
 				</ul>
 			</nav>
-			<nav class="top-bar__menu-box-2">
+
+			<nav class="top-bar__menu-box top-bar__menu-box-2">
 				<ul class="flex height-100p">
 					<c:if test="${not isLogined}">
 						<li>
@@ -137,29 +153,9 @@
 					</c:if>
 				</ul>
 			</nav>
-
-			<!--
-			<c:if test="${isLogined}">
-				<span>${loginedMember.name}님 환영합니다.</span>
-				<a href="/usr/member/doLogout">로그아웃</a>
-				<a href="/usr/member/checkLoginPw">회원정보수정</a>
-			</c:if>
-
-			<c:if test="${not isLogined}">
-				<a href="/usr/member/login">로그인</a>
-				<a href="/usr/member/join">회원가입</a>
-				<a href="/usr/member/findLoginId">로그인아이디 찾기</a>
-				<a href="/usr/member/findLoginPw">로그인비번 찾기</a>
-			</c:if>
-
-			<a href="/usr/article-notice/write">공지사항 작성</a> <a
-				href="/usr/article-notice/list">공지사항 글 리스트</a> <a
-				href="/usr/article-free/write">자유게시글 작성</a> <a
-				href="/usr/article-free/list">자유 글 리스트</a>
-			-->
 		</div>
 	</div>
 
 	<div class="title-bar con-min-width">
 		<h1 class="con">${title}</h1>
-	</div> 
+	</div>

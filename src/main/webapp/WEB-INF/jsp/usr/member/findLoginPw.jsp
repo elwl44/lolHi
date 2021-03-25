@@ -26,18 +26,37 @@
 		findLoginPwFormSubmitDone = true;
 	}
 </script>
-<form action="doFindLoginPw" method="POST"
-	onsubmit="findLoginPwFormSubmit(this); return false;">
-	<div>
-		로그인아이디 : <input type="text" maxlength="30"
-			placeholder="로그인아이디를 입력해주세요." name="loginId" />
+<div class="find-login-pw-box con-min-width">
+	<div class="con">
+		<form class="form-box-type-1" action="doFindLoginPw" method="POST"
+			onsubmit="findLoginPwFormSubmit(this); return false;">
+			<div>
+				<div>
+					<span>로그인아이디</span>
+				</div>
+				<div>
+					<input type="text" maxlength="30" placeholder="로그인아이디를 입력해주세요."
+						name="loginId" />
+				</div>
+			</div>
+			<div>
+				<div>
+					<span>이메일</span>
+				</div>
+				<div>
+					<input type="email" maxlength="50" placeholder="이메일을 입력해주세요."
+						name="email" />
+				</div>
+			</div>
+			<div>
+				<div>
+					<span>찾기</span>
+				</div>
+				<div>
+					<input type="submit" value="찾기" />
+				</div>
+			</div>
+		</form>
 	</div>
-	<div>
-		이메일 : <input type="email" maxlength="50" placeholder="이메일을 입력해주세요."
-			name="email" />
-	</div>
-	<div>
-		찾기 : <input type="submit" value="찾기" />
-	</div>
-</form>
+</div>
 <%@ include file="../part/foot.jspf"%> 
